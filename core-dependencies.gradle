@@ -1,0 +1,22 @@
+/*
+    core-dependencies.gradle 파일을 생성하고 아래의 코드를 추가한다.
+    이후 app/build.gradle 파일에서 apply from: 'core-dependencies.gradle' 코드를 추가한다.
+    이렇게 하면 app/build.gradle 파일에 있는 dependencies {} 블록에 아래의 코드가 추가된다.
+    이렇게 하면 app/build.gradle 파일이 너무 길어지는 것을 방지할 수 있다.
+ */
+dependencies {
+    implementation("androidx.activity:activity-ktx:1.8.1")
+    implementation("androidx.core:core-ktx:1.13.0-alpha01")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.0-Beta1")
+
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.10.0")
+
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+}
+
+kapt {
+    correctErrorTypes = true
+}

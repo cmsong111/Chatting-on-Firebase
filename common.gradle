@@ -1,0 +1,30 @@
+/*
+    common.gradle을 생성하고 아래의 코드를 추가한다.
+    이후 app/build.gradle 파일에서 apply from: 'common.gradle' 코드를 추가한다.
+    이렇게 하면 app/build.gradle 파일에 있는 android {} 블록에 아래의 코드가 추가된다.
+    이렇게 하면 app/build.gradle 파일이 너무 길어지는 것을 방지할 수 있다.
+ */
+android {
+    compileSdk = 34
+
+    defaultConfig {
+        minSdk = 26
+        targetSdk = 33
+        versionCode = 1
+        versionName = "1.0"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    sourceSets {
+        getByName("main").java.srcDirs("src/main/kotlin")
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
