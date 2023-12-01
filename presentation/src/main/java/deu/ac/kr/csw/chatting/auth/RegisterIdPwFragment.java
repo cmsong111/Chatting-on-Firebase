@@ -1,4 +1,4 @@
-package deu.ac.kr.csw.chatting;
+package deu.ac.kr.csw.chatting.auth;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,15 +8,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import deu.ac.kr.csw.chatting.databinding.FragmentFriendsListBinding;
+import deu.ac.kr.csw.chatting.databinding.FragmentRegisterIdPwBinding;
 
-public class FriendsListFragment extends Fragment {
-
-    FragmentFriendsListBinding binding;
+public class RegisterIdPwFragment extends Fragment {
+    FragmentRegisterIdPwBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentFriendsListBinding.inflate(inflater, container, false);
+        binding = FragmentRegisterIdPwBinding.inflate(inflater, container, false);
+        binding.setLifecycleOwner(this);
         return binding.getRoot();
     }
 }

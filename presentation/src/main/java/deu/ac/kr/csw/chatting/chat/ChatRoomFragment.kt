@@ -1,4 +1,4 @@
-package deu.ac.kr.csw.chatting
+package deu.ac.kr.csw.chatting.chat
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_nav_graph"
+    app:startDestination="@id/loginFragment">
+
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="deu.ac.kr.csw.chatting.auth.LoginFragment"
+        tools:layout="@layout/fragment_login"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerIdPwFragment"
+            app:destination="@id/registerIdPwFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerIdPwFragment"
+        android:name="deu.ac.kr.csw.chatting.auth.RegisterIdPwFragment"
+        tools:layout="@layout/fragment_register_id_pw"
+        android:label="RegisterIdPwFragment" >
+        <action
+            android:id="@+id/action_registerIdPwFragment_to_registerProfileFragment"
+            app:destination="@id/registerProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerProfileFragment"
+        tools:layout="@layout/fragment_register_profile"
+        android:name="deu.ac.kr.csw.chatting.auth.RegisterProfileFragment"
+        android:label="RegisterProfileFragment" />
+</navigation>

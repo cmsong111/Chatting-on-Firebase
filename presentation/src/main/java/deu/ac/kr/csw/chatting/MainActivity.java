@@ -5,7 +5,10 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import dagger.hilt.android.AndroidEntryPoint;
+import deu.ac.kr.csw.chatting.chat.ChatRoomFragment;
 import deu.ac.kr.csw.chatting.databinding.ActivityMainBinding;
+import deu.ac.kr.csw.chatting.friends.FriendsListFragment;
+import deu.ac.kr.csw.chatting.more.MoreFragment;
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {

@@ -51,17 +51,9 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.4.0-alpha01")
 
 
-    // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
-    implementation("com.google.firebase:firebase-auth-ktx:22.3.0")
-
-
     // Lottie (Vector Animation)
     implementation("com.airbnb.android:lottie:6.2.0")
 
-    // Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.48.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.48.1")
 
     implementation(project( path = ":data"))
     implementation(project( path = ":domain"))

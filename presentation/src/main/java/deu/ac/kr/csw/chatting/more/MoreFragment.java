@@ -1,4 +1,4 @@
-package deu.ac.kr.csw.chatting;
+package deu.ac.kr.csw.chatting.more;
 
 import android.view.View;
 
