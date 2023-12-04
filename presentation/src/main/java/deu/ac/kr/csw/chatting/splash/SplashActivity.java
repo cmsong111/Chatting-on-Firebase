@@ -26,6 +26,8 @@ public class SplashActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(SplashViewModel.class);
         setContentView(binding.getRoot());
 
+        getSupportActionBar().hide();
+
         startSplash();
     }
 

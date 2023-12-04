@@ -22,27 +22,15 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentLoginBinding.inflate(inflater, container, false);
-        binding.setLifecycleOwner(this);
-
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+
+        binding.setLifecycleOwner(this);
+        binding.setViewModel(viewModel);
 
         return binding.getRoot();
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
-        binding.googleLoginButton.setOnClickListener(v -> {
-
-        });
-
-        binding.loginButton.setOnClickListener(v -> {
-            viewModel.login();
-        });
-
     }
-
-
-
 }
