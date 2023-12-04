@@ -21,26 +21,40 @@ class UserRepositoryImpl @Inject constructor() : UserRepository {
     override val isLogin: MutableLiveData<Boolean>
         get() = MutableLiveData(firebaseAuth.currentUser != null)
 
-    override suspend fun register(email: String, password: String, name: String): UserInfo? {
+    override suspend fun register(email: String, password: String): Boolean {
+        var result = false
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
             if (it.isSuccessful) {
-                val user = UserInfo(
-                    email = email,
-                    name = name,
-                    uid = it.result?.user?.uid!!,
-                    profileImageUrl = it.result.user?.photoUrl.toString(),
-                    statusMessage = ""
+                firebaseFirestore.collection("users").document(it.result.user!!.uid).set(
+                    UserInfo(
+                        name = it.result.user!!.displayName!!,
+                        email = it.result.user!!.email!!,
+                        uid = it.result.user!!.uid,
+                        profileImageUrl = it.result.user!!.photoUrl.toString(),
+                        statusMessage = ""
+                    )
                 )
-                firebaseFirestore.collection("users").document(user.uid).set(user)
+                result = true
             }
         }
-        return null
+        return result
     }
 
     override suspend fun login(email: String, password: String): UserInfo? {
         firebaseAuth.signInWithEmailAndPassword(email, password)
         isLogin.postValue(true)
-        return null
+        var userInfo: UserInfo? = null
+        val user = firebaseAuth.currentUser
+        if (user != null) {
+            userInfo =  UserInfo(
+                email = email,
+                name = "not set",
+                uid = "",
+                profileImageUrl = "",
+                statusMessage = password
+            )
+        }
+        return userInfo
     }
 
     override suspend fun updateUserProfile(user: UserInfo): UserInfo? {
@@ -53,22 +67,27 @@ class UserRepositoryImpl @Inject constructor() : UserRepository {
             GoogleAuthProvider.getCredential(idToken, null)
         ).await()
         val user = credential.user
+        var userInfo: UserInfo? = null
         if (user != null) {
             isLogin.postValue(true)
             val userDoc = firebaseFirestore.collection("users").document(user.uid).get().await()
             if (!userDoc.exists()) {
-                val newUser = UserInfo(
+                userInfo = UserInfo(
                     email = user.email!!,
                     name = user.displayName!!,
                     uid = user.uid,
                     profileImageUrl = user.photoUrl.toString(),
                     statusMessage = ""
                 )
-                firebaseFirestore.collection("users").document(user.uid).set(newUser)
+                firebaseFirestore.collection("users").document(user.uid).set(userInfo)
             }
         }
-        return null
+        return userInfo
     }
 
+    override suspend fun logout() {
+        firebaseAuth.signOut()
+        isLogin.postValue(false)
+    }
 
 }

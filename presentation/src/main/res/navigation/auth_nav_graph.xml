@@ -13,7 +13,8 @@
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_registerIdPwFragment"
-            app:destination="@id/registerIdPwFragment" />
+            app:destination="@id/registerIdPwFragment"
+            app:popUpTo="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerIdPwFragment"

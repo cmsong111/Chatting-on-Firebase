@@ -24,23 +24,20 @@ class LoginViewModel @Inject constructor(
 
     val email: MutableLiveData<String> = MutableLiveData("")
     val password: MutableLiveData<String> = MutableLiveData("")
+    val isLogin: MutableLiveData<Boolean> = MutableLiveData(false)
 
     fun login() {
         viewModelScope.launch {
             Log.d("LoginViewModel", "login: ${email.value} ${password.value}")
-            userLoginUseCase(email.value!!, password.value!!)
-
-            if (isLonginUseCase().value!!) {
-                Log.d("LoginViewModel", "login: ${isLonginUseCase().value}")
-
-            } else {
-                Log.d("LoginViewModel", "login: ${isLonginUseCase().value}")
+            userLoginUseCase(email.value!!, password.value!!).let {
+                Log.d("LoginViewModel", "login: $it")
+                if (it != null) {
+                    isLogin.postValue(true)
+                } else {
+                    isLogin.postValue(false)
+                }
             }
         }
-    }
-
-    fun register() {
-        Log.d("LoginViewModel", "register: ${email.value} ${password.value}")
     }
 
     fun loginWithGoogle() {
