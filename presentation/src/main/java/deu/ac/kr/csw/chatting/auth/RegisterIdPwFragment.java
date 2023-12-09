@@ -11,14 +11,11 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import deu.ac.kr.csw.chatting.MainActivity;
 import deu.ac.kr.csw.chatting.databinding.FragmentRegisterIdPwBinding;
-import kotlinx.coroutines.CoroutineScope;
-import kotlinx.coroutines.Dispatchers;
 
 @AndroidEntryPoint
 public class RegisterIdPwFragment extends Fragment {
@@ -49,7 +46,7 @@ public class RegisterIdPwFragment extends Fragment {
 
     public void register() {
         viewModel.register().observe(getViewLifecycleOwner(), result -> {
-            if (result) {
+            if (result != null ) {
                 Toast.makeText(getContext(), "회원가입에 성공했습니다.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getContext(), MainActivity.class);
                 startActivity(intent);

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import deu.ac.kr.csw.chatting.databinding.FragmentRegisterIdPwBinding;
 import deu.ac.kr.csw.chatting.databinding.FragmentRegisterProfileBinding;
 
 public class RegisterProfileFragment extends Fragment {

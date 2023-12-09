@@ -33,7 +33,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void startSplash() {
         new Handler().postDelayed(() -> {
-            if (viewModel.get_isLogin().getValue()) {
+            if (viewModel.get_isLogin()) {
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
             } else {

@@ -1,18 +1,19 @@
 package deu.ac.kr.csw.chatting.auth
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import deu.ac.kr.csw.chatting.user.UserRepository
 import deu.ac.kr.csw.chatting.user.usecase.UserRegisterUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class RegisterIdPwViewModel @Inject constructor(
-    private val userRegisterUseCase: UserRegisterUseCase
+    private val userRegisterUseCase: UserRegisterUseCase,
+    private val userRepository: UserRepository
 ) : ViewModel() {
 
 
@@ -22,11 +23,13 @@ class RegisterIdPwViewModel @Inject constructor(
 
 
     // 결과 반환 MutableLiveData
-    fun register() : LiveData<Boolean> {
-        val result = MutableLiveData<Boolean>()
+    fun register() : MutableLiveData<String?> {
         viewModelScope.launch {
-            result.postValue(userRegisterUseCase(email.value!!, password.value!!))
+            Log.d("RegisterIdPwViewModel", "register: ${email.value} ${password.value}")
+            userRegisterUseCase(email.value!!, password.value!!).let {
+                Log.d("RegisterIdPwViewModel", "register: $it")
+            }
         }
-        return result
+        return userRepository.userUid
     }
 }

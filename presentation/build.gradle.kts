@@ -55,9 +55,25 @@ dependencies {
     // Lottie (Vector Animation)
     implementation("com.airbnb.android:lottie:6.2.0")
 
+    // google G Button
+    implementation ("com.github.TutorialsAndroid:GButton:v1.0.19")
+
 
     implementation(project( path = ":data"))
     implementation(project( path = ":domain"))
+
+    // Chat UI Library
+    implementation("com.google.android.flexbox:flexbox:3.0.0")
+
+    modules {
+        module("com.google.android:flexbox"){
+            replacedBy("com.google.android.flexbox:flexbox")
+        }
+    }
+
+    implementation("com.github.stfalcon-studio:Chatkit:v0.4.1"){
+        exclude("com.google.android", "flexbox")
+    }
 
 
 }

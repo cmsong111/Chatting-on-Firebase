@@ -11,11 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import java.util.ArrayList;
-
 import dagger.hilt.android.AndroidEntryPoint;
 import deu.ac.kr.csw.chatting.databinding.FragmentFriendsListBinding;
-import deu.ac.kr.csw.chatting.user.model.UserInfo;
 
 @AndroidEntryPoint
 public class FriendsListFragment extends Fragment {
