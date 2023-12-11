@@ -8,10 +8,6 @@
             name="fragment"
             type="deu.ac.kr.csw.chatting.auth.LoginFragment" />
 
-        <variable
-            name="viewModel"
-            type="deu.ac.kr.csw.chatting.auth.LoginViewModel" />
-
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -29,25 +25,27 @@
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/splash" />
 
+
         <EditText
+            android:id="@+id/email_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="username"
             android:hint="아이디"
-            android:inputType="text"
-            android:maxLines="1"
-            android:text="@={viewModel.email}" />
+            android:inputType="textEmailAddress"
+            android:maxLines="1" />
 
         <EditText
+            android:id="@+id/password_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="password"
             android:hint="비밀번호"
             android:inputType="textPassword"
-            android:maxLines="1"
-            android:text="@={viewModel.password}" />
+            android:maxLines="1" />
 
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -66,17 +64,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="@{() -> fragment.register()}"
-
                 android:text="회원가입" />
 
         </LinearLayout>
 
 
         <com.developer.gbuttons.GoogleSignInButton
+            android:id="@+id/google_sign_in_button"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:onClick="@{() -> viewModel.loginWithGoogle()}" />
+            android:onClick="@{() -> fragment.loginWithGoogle()}" />
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>

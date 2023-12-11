@@ -8,9 +8,6 @@
             name="fragment"
             type="deu.ac.kr.csw.chatting.auth.RegisterIdPwFragment" />
 
-        <variable
-            name="viewModel"
-            type="deu.ac.kr.csw.chatting.auth.RegisterIdPwViewModel" />
     </data>
 
     <LinearLayout
@@ -34,8 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="이메일를 입력하세요"
-            android:inputType="textEmailAddress"
-            android:text="@={viewModel.email}" />
+            android:inputType="textEmailAddress" />
 
         <!-- 비밀번호 입력 필드 -->
         <EditText
@@ -44,8 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="비밀번호를 입력하세요"
-            android:inputType="textPassword"
-            android:text="@={viewModel.password}" />
+            android:inputType="textPassword" />
 
         <!-- 비밀번호 확인 입력 필드 -->
         <EditText
@@ -54,8 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="비밀번호를 확인하세요"
-            android:inputType="textPassword"
-            android:text="@={viewModel.passwordCheck}" />
+            android:inputType="textPassword" />
 
         <!-- 회원가입 버튼 -->
         <Button

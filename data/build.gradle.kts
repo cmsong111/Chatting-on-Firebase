@@ -3,6 +3,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
 }
 
 apply(from = "../core-dependencies.gradle")
@@ -26,7 +27,6 @@ dependencies {
 
     // Firebase
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
-    implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
 
 

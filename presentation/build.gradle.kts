@@ -51,27 +51,32 @@ dependencies {
     // RecyclerView
     implementation("androidx.recyclerview:recyclerview:1.4.0-alpha01")
 
-
     // Lottie (Vector Animation)
     implementation("com.airbnb.android:lottie:6.2.0")
 
     // google G Button
-    implementation ("com.github.TutorialsAndroid:GButton:v1.0.19")
+    implementation("com.github.TutorialsAndroid:GButton:v1.0.19")
 
+    // Picasso (Image Loading)
+    implementation("com.squareup.picasso:picasso:2.8")
 
-    implementation(project( path = ":data"))
-    implementation(project( path = ":domain"))
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+
+    implementation(project(path = ":data"))
+    implementation(project(path = ":domain"))
 
     // Chat UI Library
     implementation("com.google.android.flexbox:flexbox:3.0.0")
 
     modules {
-        module("com.google.android:flexbox"){
+        module("com.google.android:flexbox") {
             replacedBy("com.google.android.flexbox:flexbox")
         }
     }
 
-    implementation("com.github.stfalcon-studio:Chatkit:v0.4.1"){
+    implementation("com.github.stfalcon-studio:Chatkit:v0.4.1") {
         exclude("com.google.android", "flexbox")
     }
 

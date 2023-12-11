@@ -1,56 +1,77 @@
 package deu.ac.kr.csw.chatting.auth;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+
 import androidx.navigation.fragment.NavHostFragment;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.auth.FirebaseAuth;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import deu.ac.kr.csw.chatting.MainActivity;
+import deu.ac.kr.csw.chatting.R;
 import deu.ac.kr.csw.chatting.databinding.FragmentLoginBinding;
+import deu.ac.kr.csw.chatting.widget.LoadingDialog;
 
 @AndroidEntryPoint
 public class LoginFragment extends Fragment {
     FragmentLoginBinding binding;
-    LoginViewModel viewModel;
+    LoadingDialog loadingDialog;
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentLoginBinding.inflate(inflater, container, false);
-        viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-
         binding.setLifecycleOwner(this);
-        binding.setViewModel(viewModel);
         binding.setFragment(this);
-
         ((AppCompatActivity) requireActivity()).getSupportActionBar().hide();
-
-
         return binding.getRoot();
     }
 
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        viewModel.isLogin().observeForever(isLogin -> {
-            if (isLogin) {
-                Intent intent = new Intent(getContext(), MainActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
-        });
-    }
-
+    /**
+     * 로그인 버튼을 눌렀을 때 호출되는 함수
+     */
     public void login() {
         Log.d("LoginFragment", "login");
-        viewModel.login();
+
+        loadingDialog = new LoadingDialog(getContext());
+        loadingDialog.show();
+
+        String email = binding.emailEditText.getText().toString();
+        String password = binding.passwordEditText.getText().toString();
+
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(getContext(), "이메일과 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+            loadingDialog.dismiss();
+            return;
+        }
+
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                String userUid = task.getResult().getUser().getUid();
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                loadingDialog.dismiss();
+                startActivity(intent);
+                getActivity().finish();
+            } else {
+                Toast.makeText(getContext(), "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                loadingDialog.dismiss();
+            }
+        });
     }
 
     public void register() {
@@ -61,6 +82,6 @@ public class LoginFragment extends Fragment {
 
     public void loginWithGoogle() {
         Log.d("LoginFragment", "loginWithGoogle");
-//        LoginWithGoogleUserCase loginWithGoogleUserCase = new LoginWithGoogleUserCase(requireActivity());
+        Toast.makeText(getContext(), "구글 로그인(미구현)", Toast.LENGTH_SHORT).show();
     }
 }
