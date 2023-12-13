@@ -2,14 +2,14 @@ package deu.ac.kr.csw.chatting.friends
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import deu.ac.kr.csw.chatting.user.model.UserInfo
+import deu.ac.kr.csw.chatting.user.model.User
 import javax.inject.Inject
 
 
 @HiltViewModel
 class FriendListViewModel @Inject constructor(
 ) : ViewModel() {
-    var friends = ArrayList<UserInfo>()
+    var friends = ArrayList<User>()
     var friendListAdapter = FriendListAdapter(friends)
 
 
@@ -17,12 +17,14 @@ class FriendListViewModel @Inject constructor(
     init {
         for (i in 1..100) {
             friends.add(
-                UserInfo(
-                    uid = "uid$i",
-                    email = "email$i@test.com",
-                    name = "name$i",
-                    profileImageUrl = "profileImageUrl$i",
-                    statusMessage = "statusMessage$i"
+                User(
+                    "id$i",
+                    "name$i",
+                    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+                    "email$i@domain.com",
+                    "fcmToken$i",
+                    "status Message $i",
+                    true,
                 )
             )
         }

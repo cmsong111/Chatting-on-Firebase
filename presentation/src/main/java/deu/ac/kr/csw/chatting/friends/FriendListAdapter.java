@@ -12,11 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import deu.ac.kr.csw.chatting.R;
-import deu.ac.kr.csw.chatting.user.model.UserInfo;
+import deu.ac.kr.csw.chatting.user.model.User;
 
 public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.ViewHolder> {
 
-    ArrayList<UserInfo> friends;
+    ArrayList<User> friends;
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -48,7 +48,7 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
      *
      * @param friends 친구 목록
      */
-    public FriendListAdapter(ArrayList<UserInfo> friends) {
+    public FriendListAdapter(ArrayList<User> friends) {
         this.friends = friends;
     }
 
@@ -61,7 +61,7 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        UserInfo friend = friends.get(position);
+        User friend = friends.get(position);
         holder.getFriendName().setText(friend.getName());
         holder.getFriendStatus().setText(friend.getStatusMessage());
         //holder.getFriendProfile().setImageResource(R.drawable.ic_launcher_foreground);

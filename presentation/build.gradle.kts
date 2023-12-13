@@ -67,18 +67,7 @@ dependencies {
     implementation(project(path = ":data"))
     implementation(project(path = ":domain"))
 
-    // Chat UI Library
-    implementation("com.google.android.flexbox:flexbox:3.0.0")
 
-    modules {
-        module("com.google.android:flexbox") {
-            replacedBy("com.google.android.flexbox:flexbox")
-        }
-    }
-
-    implementation("com.github.stfalcon-studio:Chatkit:v0.4.1") {
-        exclude("com.google.android", "flexbox")
-    }
 
 
 }

@@ -1,10 +1,7 @@
 package deu.ac.kr.csw.chatting.user
 
-import androidx.lifecycle.MutableLiveData
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-
 import com.google.firebase.firestore.FirebaseFirestore
-import deu.ac.kr.csw.chatting.user.model.UserInfo
+import deu.ac.kr.csw.chatting.user.model.User
 import javax.inject.Inject
 
 /**
@@ -15,12 +12,12 @@ class UserRepositoryImpl @Inject constructor() : UserRepository {
 
     private val firebaseFirestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    override suspend fun setUserInfo(user: UserInfo): UserInfo? {
-        firebaseFirestore.collection("users").document(user.uid).set(user)
+    override suspend fun setUserInfo(user: User): User? {
+        firebaseFirestore.collection("users").document(user.email).set(user)
         return null
     }
 
-    override suspend fun getUserInfo(uid: String): UserInfo? {
+    override suspend fun getUserInfo(uid: String): User? {
         // TODO: 사용자 정보 가져오기 구현
         return null
     }

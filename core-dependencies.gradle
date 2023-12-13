@@ -19,6 +19,9 @@ dependencies {
     // Dagger Hilt
     implementation("com.google.dagger:hilt-android:2.48.1")
     kapt("com.google.dagger:hilt-android-compiler:2.48.1")
+
+    // Chat UI 버전 문제로 mikashboks 개발자가 수정한 라이브러리 사용
+    implementation ("com.github.mikashboks:MkbChatKit:1.0.6")
 }
 
 kapt {
