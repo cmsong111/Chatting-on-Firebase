@@ -18,13 +18,12 @@ class FriendListViewModel @Inject constructor(
         for (i in 1..100) {
             friends.add(
                 User(
-                    "id$i",
+                    "email$i@domain.com",
                     "name$i",
                     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-                    "email$i@domain.com",
-                    "fcmToken$i",
-                    "status Message $i",
                     true,
+                    "fcmToken$i",
+                    "status Message $i"
                 )
             )
         }

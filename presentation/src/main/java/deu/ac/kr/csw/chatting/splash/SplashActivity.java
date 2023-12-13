@@ -9,9 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 import dagger.hilt.android.AndroidEntryPoint;
-import deu.ac.kr.csw.chatting.MainActivity;
 import deu.ac.kr.csw.chatting.auth.AuthActivity;
 import deu.ac.kr.csw.chatting.databinding.ActivitySplashBinding;
+import deu.ac.kr.csw.chatting.friends.FriendsListActivity;
 
 @AndroidEntryPoint
 public class SplashActivity extends AppCompatActivity {
@@ -31,7 +31,7 @@ public class SplashActivity extends AppCompatActivity {
     private void startSplash() {
         new Handler().postDelayed(() -> {
             if (firebaseAuth.getCurrentUser() != null) {
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, FriendsListActivity.class));
                 finish();
             } else {
                 startActivity(new Intent(this, AuthActivity.class));

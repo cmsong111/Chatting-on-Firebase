@@ -31,11 +31,13 @@ public class User implements IUser {
         this.statusMessage = statusMessage;
     }
 
-    public User(String id, String name, String avatar, boolean online) {
+    public User(String id, String name, String avatar, boolean online, String fcm, String statusMessage) {
         this.id = id;
         this.name = name;
         this.avatar = avatar;
         this.online = online;
+        this.fcm = fcm;
+        this.statusMessage = statusMessage;
     }
 
     @Override

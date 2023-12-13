@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import deu.ac.kr.csw.chatting.R;
@@ -27,7 +29,7 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
             super(itemView);
             friendName = (TextView) itemView.findViewById(R.id.friends_list_tile_name);
             friendStatus = (TextView) itemView.findViewById(R.id.friends_list_tile_status);
-            //friendProfile = (ImageView) itemView.findViewById(R.id.friends_list_tile_image);
+            friendProfile = (ImageView) itemView.findViewById(R.id.friends_list_tile_image);
         }
 
         public TextView getFriendName() {
@@ -38,9 +40,9 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
             return friendStatus;
         }
 
-//        public ImageView getFriendProfile() {
-//            return friendProfile;
-//        }
+        public ImageView getFriendProfile() {
+            return friendProfile;
+        }
     }
 
     /**
@@ -64,7 +66,7 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
         User friend = friends.get(position);
         holder.getFriendName().setText(friend.getName());
         holder.getFriendStatus().setText(friend.getStatusMessage());
-        //holder.getFriendProfile().setImageResource(R.drawable.ic_launcher_foreground);
+        Picasso.get().load(friend.getAvatar()).into(holder.getFriendProfile());
     }
 
     @Override

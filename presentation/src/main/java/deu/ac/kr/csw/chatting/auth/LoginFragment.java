@@ -9,22 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
 import dagger.hilt.android.AndroidEntryPoint;
-import deu.ac.kr.csw.chatting.MainActivity;
-import deu.ac.kr.csw.chatting.R;
 import deu.ac.kr.csw.chatting.databinding.FragmentLoginBinding;
+import deu.ac.kr.csw.chatting.friends.FriendsListActivity;
 import deu.ac.kr.csw.chatting.widget.LoadingDialog;
 
 @AndroidEntryPoint
@@ -63,7 +57,7 @@ public class LoginFragment extends Fragment {
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 String userUid = task.getResult().getUser().getUid();
-                Intent intent = new Intent(getContext(), MainActivity.class);
+                Intent intent = new Intent(getContext(), FriendsListActivity.class);
                 loadingDialog.dismiss();
                 startActivity(intent);
                 getActivity().finish();
@@ -84,4 +78,5 @@ public class LoginFragment extends Fragment {
         Log.d("LoginFragment", "loginWithGoogle");
         Toast.makeText(getContext(), "구글 로그인(미구현)", Toast.LENGTH_SHORT).show();
     }
+
 }
