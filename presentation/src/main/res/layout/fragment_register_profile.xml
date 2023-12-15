@@ -45,6 +45,7 @@
             android:id="@+id/buttonRegisterProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="@{() -> fragment.saveProfile()}"
             android:text="프로필 등록" />
 
 
