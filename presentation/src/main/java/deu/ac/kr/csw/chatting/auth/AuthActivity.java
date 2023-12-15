@@ -10,7 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 import deu.ac.kr.csw.chatting.databinding.ActivityAuthBinding;
 
 @AndroidEntryPoint
-public class AuthActivity extends AppCompatActivity   {
+public class AuthActivity extends AppCompatActivity {
 
     ActivityAuthBinding binding;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();

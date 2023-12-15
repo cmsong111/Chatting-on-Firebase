@@ -10,7 +10,7 @@
         android:id="@+id/loginFragment"
         android:name="deu.ac.kr.csw.chatting.auth.LoginFragment"
         tools:layout="@layout/fragment_login"
-        android:label="LoginFragment" >
+        android:label="LoginFragment">
         <action
             android:id="@+id/action_loginFragment_to_registerIdPwFragment"
             app:destination="@id/registerIdPwFragment"
@@ -20,7 +20,7 @@
         android:id="@+id/registerIdPwFragment"
         android:name="deu.ac.kr.csw.chatting.auth.RegisterIdPwFragment"
         tools:layout="@layout/fragment_register_id_pw"
-        android:label="RegisterIdPwFragment" >
+        android:label="RegisterIdPwFragment">
         <action
             android:id="@+id/action_registerIdPwFragment_to_registerProfileFragment"
             app:destination="@id/registerProfileFragment" />

@@ -1,7 +1,6 @@
 package deu.ac.kr.csw.chatting.chat
 
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -13,7 +12,6 @@ import com.squareup.picasso.Picasso
 import com.stfalcon.chatkit.commons.ImageLoader
 import com.stfalcon.chatkit.messages.MessageInput
 import com.stfalcon.chatkit.messages.MessagesListAdapter
-import dagger.hilt.android.HiltAndroidApp
 import deu.ac.kr.csw.chatting.R
 import deu.ac.kr.csw.chatting.databinding.ActivityChatBinding
 import deu.ac.kr.csw.chatting.user.model.Message
@@ -172,8 +170,6 @@ class ChatActivity : AppCompatActivity(), MessagesListAdapter.SelectionListener,
             "Typing listener", "stop typing"
         )
     }
-
-
 
 
 }
