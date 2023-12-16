@@ -25,6 +25,7 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
         TextView friendName;
         TextView friendStatus;
         ImageView friendProfile;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             friendName = (TextView) itemView.findViewById(R.id.friends_list_tile_name);

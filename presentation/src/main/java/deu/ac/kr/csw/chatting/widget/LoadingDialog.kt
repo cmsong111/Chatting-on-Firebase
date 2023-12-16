@@ -9,7 +9,8 @@ import deu.ac.kr.csw.chatting.R
 class LoadingDialog(
     private val context: Context
 ) {
-    private val view: View? = LayoutInflater.from(context).inflate(R.layout.alert_dialog_progressbar, null)
+    private val view: View? =
+        LayoutInflater.from(context).inflate(R.layout.alert_dialog_progressbar, null)
 
     private val builder: AlertDialog.Builder = AlertDialog.Builder(context)
 
