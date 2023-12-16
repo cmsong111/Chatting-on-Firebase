@@ -18,4 +18,10 @@ interface UserRepository {
      * @return 사용자 정보 반환
      */
     suspend fun getUserInfo(uid: String): User?
+
+    /**
+     * 사용자 리스트 가져오는 메소드
+     * @return 사용자 리스트 반환
+     */
+    suspend fun getUserList(): List<User>
 }

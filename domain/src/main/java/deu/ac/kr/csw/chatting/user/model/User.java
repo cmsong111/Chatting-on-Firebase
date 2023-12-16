@@ -31,6 +31,9 @@ public class User implements IUser {
         this.statusMessage = statusMessage;
     }
 
+    public User() {
+    }
+
     public User(String id, String name, String avatar, boolean online, String fcm, String statusMessage) {
         this.id = id;
         this.name = name;
@@ -57,5 +60,17 @@ public class User implements IUser {
 
     public boolean isOnline() {
         return online;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", name='" + name +
+                ", avatar='" + avatar +
+                ", online=" + online +
+                ", fcm=" + fcm +
+                ", statusMessage=" + statusMessage +
+                '}';
     }
 }

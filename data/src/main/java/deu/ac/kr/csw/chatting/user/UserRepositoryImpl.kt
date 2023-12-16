@@ -1,7 +1,9 @@
 package deu.ac.kr.csw.chatting.user
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.toObjects
 import deu.ac.kr.csw.chatting.user.model.User
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 /**
@@ -20,6 +22,10 @@ class UserRepositoryImpl @Inject constructor() : UserRepository {
     override suspend fun getUserInfo(uid: String): User? {
         val user = firebaseFirestore.collection("users").document(uid).get().result?.toObject(User::class.java)
         return user
+    }
+
+    override suspend fun getUserList(): List<User> {
+        return  firebaseFirestore.collection("users").get().await().toObjects<User>()
     }
 
 

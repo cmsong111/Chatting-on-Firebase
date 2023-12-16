@@ -12,13 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import deu.ac.kr.csw.chatting.R;
 import deu.ac.kr.csw.chatting.user.model.User;
 
 public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.ViewHolder> {
 
-    ArrayList<User> friends;
+    List<User> friends;
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -51,7 +52,7 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
      *
      * @param friends 친구 목록
      */
-    public FriendListAdapter(ArrayList<User> friends) {
+    public FriendListAdapter(List<User> friends) {
         this.friends = friends;
     }
 
@@ -73,5 +74,10 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
     @Override
     public int getItemCount() {
         return friends.size();
+    }
+
+    public void setFriends(List<User> friends) {
+        this.friends = friends;
+        notifyDataSetChanged();
     }
 }
