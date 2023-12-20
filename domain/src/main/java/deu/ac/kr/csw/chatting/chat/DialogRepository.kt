@@ -8,7 +8,7 @@ interface DialogRepository {
      * 내가 속한 채팅방 리스트를 가져오는 메소드
      * @param uid String 내 UID
      */
-    suspend fun getDialogList(uid: String): List<Dialog>
+    suspend fun getDialogList(uid: String): ArrayList<Dialog>
 
     /**
      * 채팅방 생성 메소드
