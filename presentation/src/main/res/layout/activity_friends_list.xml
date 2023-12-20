@@ -15,11 +15,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/friends_list_recycler_view"
+        <ListView
+            android:id="@+id/friends_list_view"
             adapter="@{viewModel.friendListAdapter}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clickable="true"
             android:scrollbarFadeDuration="0"
             android:scrollbars="vertical"
             app:layout_constraintBottom_toBottomOf="parent"

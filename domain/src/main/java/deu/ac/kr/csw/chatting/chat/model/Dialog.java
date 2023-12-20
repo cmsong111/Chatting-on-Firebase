@@ -1,8 +1,10 @@
-package deu.ac.kr.csw.chatting.user.model;
+package deu.ac.kr.csw.chatting.chat.model;
 
 import com.stfalcon.chatkit.commons.models.IDialog;
 
 import java.util.ArrayList;
+
+import deu.ac.kr.csw.chatting.user.model.User;
 
 
 public class Dialog implements IDialog<Message> {
@@ -29,6 +31,10 @@ public class Dialog implements IDialog<Message> {
     @Override
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override

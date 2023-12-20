@@ -1,5 +1,6 @@
 package deu.ac.kr.csw.chatting.friends
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,11 +14,9 @@ import javax.inject.Inject
 class FriendListViewModel @Inject constructor(
     val userRepository: UserRepository
 ) : ViewModel() {
-    var friends : List<User> = emptyList()
+    var friends: List<User> = emptyList()
     var friendListAdapter = FriendListAdapter(friends)
 
-
-    // TODO: Firebase에서 친구 목록을 가져와서 friends에 넣어주는 코드를 작성해야 합니다.
     init {
         viewModelScope.launch {
             userRepository.getUserList().let {

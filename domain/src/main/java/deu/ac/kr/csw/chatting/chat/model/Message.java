@@ -1,10 +1,12 @@
-package deu.ac.kr.csw.chatting.user.model;
+package deu.ac.kr.csw.chatting.chat.model;
 
 
 import com.stfalcon.chatkit.commons.models.IMessage;
 import com.stfalcon.chatkit.commons.models.MessageContentType;
 
 import java.util.Date;
+
+import deu.ac.kr.csw.chatting.user.model.User;
 
 
 public class Message implements IMessage,

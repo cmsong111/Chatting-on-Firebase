@@ -14,7 +14,7 @@ import com.stfalcon.chatkit.messages.MessageInput
 import com.stfalcon.chatkit.messages.MessagesListAdapter
 import deu.ac.kr.csw.chatting.R
 import deu.ac.kr.csw.chatting.databinding.ActivityChatBinding
-import deu.ac.kr.csw.chatting.user.model.Message
+import deu.ac.kr.csw.chatting.chat.model.Message
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

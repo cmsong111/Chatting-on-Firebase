@@ -12,7 +12,7 @@ import deu.ac.kr.csw.chatting.R
 import deu.ac.kr.csw.chatting.databinding.ActivityDialogBinding
 import deu.ac.kr.csw.chatting.friends.FriendsListActivity
 import deu.ac.kr.csw.chatting.more.MoreActivity
-import deu.ac.kr.csw.chatting.user.model.Dialog
+import deu.ac.kr.csw.chatting.chat.model.Dialog
 
 
 class DialogActivity : AppCompatActivity(), DialogsListAdapter.OnDialogClickListener<Dialog?>,
