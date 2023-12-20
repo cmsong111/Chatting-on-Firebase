@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            app:inputHint="hint_enter_a_message"
+            app:inputHint="채팅을 입력하세요."
             app:showAttachmentButton="true" />
 
     </RelativeLayout>

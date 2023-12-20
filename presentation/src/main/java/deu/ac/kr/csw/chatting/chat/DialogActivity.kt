@@ -53,7 +53,11 @@ class DialogActivity : AppCompatActivity(), DialogsListAdapter.OnDialogClickList
     }
 
     override fun onDialogClick(dialog: Dialog?) {
-        startActivity(Intent(this, ChatActivity::class.java))
+        val intent : Intent = Intent(this, ChatActivity::class.java)
+        if (dialog != null) {
+            intent.putExtra("dialogId", dialog.id)
+        }
+        startActivity(intent)
     }
 
     private fun initAdapter() {

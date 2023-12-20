@@ -19,4 +19,6 @@ interface DialogRepository {
      * @param yourUid String 상대방 UID
      */
     suspend fun getDialog(myUid: String, yourUid: String): Dialog
+
+    suspend fun getDialog(uid: String): Dialog
 }

@@ -8,25 +8,42 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.input.key.Key.Companion.Sleep
+import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.lifecycleScope
+import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import com.stfalcon.chatkit.commons.ImageLoader
 import com.stfalcon.chatkit.messages.MessageInput
 import com.stfalcon.chatkit.messages.MessagesListAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import deu.ac.kr.csw.chatting.R
+import deu.ac.kr.csw.chatting.chat.model.Dialog
 import deu.ac.kr.csw.chatting.databinding.ActivityChatBinding
 import deu.ac.kr.csw.chatting.chat.model.Message
+import deu.ac.kr.csw.chatting.user.model.User
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class ChatActivity : AppCompatActivity(), MessagesListAdapter.SelectionListener,
     MessagesListAdapter.OnLoadMoreListener, MessageInput.InputListener,
     MessageInput.AttachmentsListener, MessageInput.TypingListener {
 
     private lateinit var binding: ActivityChatBinding
 
-    private val senderId = "0"
+    @Inject
+    lateinit var messageRepository: MessageRepository
+
+    @Inject
+    lateinit var dialogRepository: DialogRepository
+
     private var imageLoader: ImageLoader =
         ImageLoader { imageView: ImageView?, url: String?, payload: Any? ->
             Picasso.get().load(url).into(imageView)
@@ -35,6 +52,10 @@ class ChatActivity : AppCompatActivity(), MessagesListAdapter.SelectionListener,
     private var menu: Menu? = null
     private var selectionCount = 0
     private var lastLoadedDate: Date? = null
+    private lateinit var dialogId: String
+    private lateinit var dialog: Dialog
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +67,13 @@ class ChatActivity : AppCompatActivity(), MessagesListAdapter.SelectionListener,
         input.setInputListener(this)
         input.setTypingListener(this)
         input.setAttachmentsListener(this)
+
+        dialogId = intent.getStringExtra("dialogId")!!
+
+        lifecycleScope.launch {
+            dialog = dialogRepository.getDialog(dialogId)
+            supportActionBar?.title = dialog.dialogName
+        }
     }
 
     override fun onStart() {
@@ -103,8 +131,35 @@ class ChatActivity : AppCompatActivity(), MessagesListAdapter.SelectionListener,
     }
 
     private fun loadMessages(useDelay: Boolean) {
+        Log.d("ChatActivity", "loadMessages")
         val messages = ArrayList<Message>()
         messagesAdapter!!.addToEnd(messages, false)
+
+
+        lifecycleScope.launch {
+            delay(1000)
+            messagesAdapter!!.clear(true)
+            messageRepository.getMessageList(dialogId).collect() { it ->
+                Log.d("ChatActivity", "message: $it")
+                lateinit var user: User
+                if (dialog.users.get(0).uid == it.user ){
+                    user = dialog.users[0]
+                } else{
+                    user = dialog.users[1]
+                }
+                val message: Message = Message(
+                    it.id,
+                    user,
+                    it.text,
+                    it.createdAt,
+                    it.systemGenerated
+                )
+
+                messagesAdapter!!.addToStart(message, true)
+            }.let {
+                Log.d("ChatActivity", "message: $it")
+            }
+        }
     }
 
     private val messageStringFormatter: MessagesListAdapter.Formatter<Message?>
@@ -131,6 +186,9 @@ class ChatActivity : AppCompatActivity(), MessagesListAdapter.SelectionListener,
 
     override fun onSubmit(input: CharSequence): Boolean {
         //super.messagesAdapter!!.addToStart(
+        lifecycle.coroutineScope.launch {
+            messageRepository.sendMessage(dialogId, input.toString(), FirebaseAuth.getInstance().uid!!)
+        }
         return true
     }
 
@@ -140,7 +198,7 @@ class ChatActivity : AppCompatActivity(), MessagesListAdapter.SelectionListener,
 
     private fun initAdapter() {
         messagesAdapter = MessagesListAdapter(
-            senderId,
+            FirebaseAuth.getInstance().uid!!,
             imageLoader
         )
         messagesAdapter!!.enableSelectionMode(this)

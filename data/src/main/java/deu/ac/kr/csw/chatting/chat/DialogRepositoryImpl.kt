@@ -58,14 +58,18 @@ class DialogRepositoryImpl @Inject constructor(
             }
 
         Log.d("DialogRepositoryImpl", "Dialog is not exist")
+
         DialogEntity(
+            "",
             "https://m.media-amazon.com/images/I/31VjU29FP+L.png",
             "${myUid}와 ${yourUid}의 대화",
             listOf(myUid, yourUid),
             "ss",
             0,
         ).let {
-            firebaseFirestore.collection("dialogs").add(it).await()
+            firebaseFirestore.collection("dialogs").add(it).await().let {
+                firebaseFirestore.collection("dialogs").document(it.id).update("uid", it.id).await()
+            }
             return toDto(it)
         }
 
@@ -92,5 +96,11 @@ class DialogRepositoryImpl @Inject constructor(
             Message("Stf", users[0], "Hello", Date()),
             dialogentity.unreadCount
         )
+    }
+
+    override suspend fun getDialog(uid: String): Dialog {
+        firebaseFirestore.collection("dialogs").document(uid).get().await().toObject(DialogEntity::class.java).let {
+            return toDto(it!!)
+        }
     }
 }

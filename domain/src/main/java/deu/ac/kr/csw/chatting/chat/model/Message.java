@@ -27,15 +27,20 @@ public class Message implements IMessage,
     }
 
     public Message(String id, User user, String text, Date createdAt) {
-        this(id, user, text, createdAt, false);
+        this(id, user, text, createdAt, false, false);
     }
 
-    public Message(String id, User user, String text, Date createdAt, Boolean unread) {
+    public Message(String id, User user, String text, Date createdAt,  Boolean systemGenerated) {
+        this(id, user, text, createdAt, false, systemGenerated);
+    }
+
+    public Message(String id, User user, String text, Date createdAt, Boolean unread, Boolean systemGenerated) {
         this.id = id;
         this.text = text;
         this.user = user;
         this.createdAt = createdAt;
         this.unread = unread;
+        this.systemGenerated = systemGenerated;
     }
 
     @Override
