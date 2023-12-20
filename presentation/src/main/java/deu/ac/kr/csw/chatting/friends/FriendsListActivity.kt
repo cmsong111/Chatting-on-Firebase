@@ -37,11 +37,12 @@ class FriendsListActivity : AppCompatActivity() {
         binding.setViewModel(viewModel)
         binding.friendsListView.setAdapter(viewModel!!.friendListAdapter)
 
+
+        supportActionBar!!.title = "친구"
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         setContentView(binding.getRoot())
         setBottomNavigation()
-
-        supportActionBar!!.hide()
-
 
         binding.friendsListView.setOnItemClickListener { parent, view, position, id ->
             Toast.makeText(this, "친구를 클릭했습니다.", Toast.LENGTH_SHORT).show()

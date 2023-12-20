@@ -28,6 +28,11 @@ public class Dialog implements IDialog<Message> {
         this.unreadCount = unreadCount;
     }
 
+    public String setDialogName(String dialogName){
+        this.dialogName = dialogName;
+        return dialogName;
+    }
+
     @Override
     public String getId() {
         return id;

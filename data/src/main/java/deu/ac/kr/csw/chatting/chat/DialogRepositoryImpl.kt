@@ -23,6 +23,10 @@ class DialogRepositoryImpl @Inject constructor(
                     Log.d("DialogRepositoryImpl", "dialogentity: $dialogentity")
                     var dialog: Dialog = toDto(dialogentity!!)
                     dialog.id = document.id
+                    if (dialog.users[0].uid == uid)
+                        dialog.dialogName = dialog.users[1].name
+                    else
+                        dialog.dialogName = dialog.users[0].name
                     dialogList.add(dialog)
                 }
             }
@@ -36,22 +40,27 @@ class DialogRepositoryImpl @Inject constructor(
 
     override suspend fun getDialog(myUid: String, yourUid: String): Dialog {
 
-        firebaseFirestore.collection("dialogs").whereArrayContains("users", myUid).get().await().let {
-            it.documents.forEach { document ->
-                document.toObject(DialogEntity::class.java).let { dialogentity ->
-                    if (document.toObject(DialogEntity::class.java)!!.users.contains(yourUid)) {
-                        var dialog: Dialog = toDto(dialogentity!!)
-                        dialog.id = document.id
-                        return dialog
+        firebaseFirestore.collection("dialogs").whereArrayContains("users", myUid).get().await()
+            .let {
+                it.documents.forEach { document ->
+                    document.toObject(DialogEntity::class.java).let { dialogentity ->
+                        if (document.toObject(DialogEntity::class.java)!!.users.contains(yourUid)) {
+                            var dialog: Dialog = toDto(dialogentity!!)
+                            dialog.id = document.id
+                            if (dialog.users[0].uid == myUid)
+                                dialog.dialogName = dialog.users[1].name
+                            else
+                                dialog.dialogName = dialog.users[0].name
+                            return dialog
+                        }
                     }
                 }
             }
-        }
 
         Log.d("DialogRepositoryImpl", "Dialog is not exist")
         DialogEntity(
             "https://m.media-amazon.com/images/I/31VjU29FP+L.png",
-            "채팅방",
+            "${myUid}와 ${yourUid}의 대화",
             listOf(myUid, yourUid),
             "ss",
             0,
