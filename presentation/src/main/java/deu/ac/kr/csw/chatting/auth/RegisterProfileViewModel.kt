@@ -12,9 +12,9 @@ class RegisterProfileViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    fun setUserInfo(uid: String, user: User) : Unit {
+    fun setUserInfo(user: User) : Unit {
         viewModelScope.launch {
-            setUserInfoUseCase(uid, user)
+            setUserInfoUseCase( user)
         }
     }
 

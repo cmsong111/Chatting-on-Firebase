@@ -10,7 +10,7 @@ interface UserRepository {
      * @param user UserInfo 사용자 정보
      * @return 업데이트 된 사용자 정보 반환
      */
-    suspend fun setUserInfo(uid: String, user: User): User?
+    suspend fun setUserInfo( user: User): User?
 
     /**
      * 사용자 정보 가져오는 메소드

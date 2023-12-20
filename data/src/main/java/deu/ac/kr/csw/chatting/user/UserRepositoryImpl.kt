@@ -14,8 +14,8 @@ class UserRepositoryImpl @Inject constructor() : UserRepository {
 
     private val firebaseFirestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    override suspend fun setUserInfo(uid: String, user: User): User {
-        firebaseFirestore.collection("users").document(uid).set(user)
+    override suspend fun setUserInfo( user: User): User {
+        firebaseFirestore.collection("users").document(user.uid).set(user)
         return user
     }
 

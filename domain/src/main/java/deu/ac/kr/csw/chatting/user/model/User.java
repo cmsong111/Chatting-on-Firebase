@@ -9,6 +9,7 @@ import com.stfalcon.chatkit.commons.models.IUser;
 public class User implements IUser {
 
     private String id;
+    private String uid;
     private String name;
     private String avatar;
     private boolean online;
@@ -34,13 +35,14 @@ public class User implements IUser {
     public User() {
     }
 
-    public User(String id, String name, String avatar, boolean online, String fcm, String statusMessage) {
+    public User(String id, String name, String avatar, boolean online, String fcm, String statusMessage, String uid) {
         this.id = id;
         this.name = name;
         this.avatar = avatar;
         this.online = online;
         this.fcm = fcm;
         this.statusMessage = statusMessage;
+        this.uid = uid;
     }
 
     @Override
@@ -71,6 +73,15 @@ public class User implements IUser {
                 ", online=" + online +
                 ", fcm=" + fcm +
                 ", statusMessage=" + statusMessage +
+                ", uid=" + uid +
                 '}';
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

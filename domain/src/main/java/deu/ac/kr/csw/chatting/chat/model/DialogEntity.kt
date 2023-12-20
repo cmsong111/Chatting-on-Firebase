@@ -9,4 +9,6 @@ class DialogEntity(
     var lastMessage: String,
     var unreadCount: Int = 0
 ) {
+    constructor() : this("", "", listOf(), "", 0)
+
 }

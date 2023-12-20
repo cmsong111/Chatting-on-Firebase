@@ -7,6 +7,6 @@ import javax.inject.Inject
 class SetUserInfoUseCase @Inject() constructor(
     private val userRepository: UserRepository
 ) {
-    suspend operator fun invoke(uid: String, user: User) =
-        userRepository.setUserInfo(uid,user)
+    suspend operator fun invoke( user: User) =
+        userRepository.setUserInfo(user)
 }
