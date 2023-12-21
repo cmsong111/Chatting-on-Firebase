@@ -8,10 +8,12 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.input.key.Key.Companion.Sleep
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.ktx.messaging
 import com.squareup.picasso.Picasso
 import com.stfalcon.chatkit.commons.ImageLoader
 import com.stfalcon.chatkit.messages.MessageInput
@@ -19,17 +21,17 @@ import com.stfalcon.chatkit.messages.MessagesListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import deu.ac.kr.csw.chatting.R
 import deu.ac.kr.csw.chatting.chat.model.Dialog
-import deu.ac.kr.csw.chatting.databinding.ActivityChatBinding
 import deu.ac.kr.csw.chatting.chat.model.Message
+import deu.ac.kr.csw.chatting.databinding.ActivityChatBinding
+import com.google.firebase.messaging.ktx.remoteMessage
 import deu.ac.kr.csw.chatting.user.model.User
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class ChatActivity : AppCompatActivity(), MessagesListAdapter.SelectionListener,
@@ -54,7 +56,6 @@ class ChatActivity : AppCompatActivity(), MessagesListAdapter.SelectionListener,
     private var lastLoadedDate: Date? = null
     private lateinit var dialogId: String
     private lateinit var dialog: Dialog
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -142,9 +143,9 @@ class ChatActivity : AppCompatActivity(), MessagesListAdapter.SelectionListener,
             messageRepository.getMessageList(dialogId).collect() { it ->
                 Log.d("ChatActivity", "message: $it")
                 lateinit var user: User
-                if (dialog.users.get(0).uid == it.user ){
+                if (dialog.users.get(0).uid == it.user) {
                     user = dialog.users[0]
-                } else{
+                } else {
                     user = dialog.users[1]
                 }
                 val message: Message = Message(
@@ -187,8 +188,30 @@ class ChatActivity : AppCompatActivity(), MessagesListAdapter.SelectionListener,
     override fun onSubmit(input: CharSequence): Boolean {
         //super.messagesAdapter!!.addToStart(
         lifecycle.coroutineScope.launch {
-            messageRepository.sendMessage(dialogId, input.toString(), FirebaseAuth.getInstance().uid!!)
+            messageRepository.sendMessage(
+                dialogId,
+                input.toString(),
+                FirebaseAuth.getInstance().uid!!
+            )
         }
+
+        val fm = Firebase.messaging
+        var fcmToken: String = ""
+        if (FirebaseAuth.getInstance().uid == dialog.users[0].uid) {
+            fcmToken = dialog.users[1].fcm
+        } else {
+            fcmToken = dialog.users[0].fcm
+        }
+        fm.send(
+            com.google.firebase.messaging.RemoteMessage.Builder(fcmToken)
+                .setMessageId("1")
+                .addData("title", "title")
+                .addData("body", input.toString())
+                .build()
+        )
+
+        Log.d("ChatActivity", "result: , fcmToken: $fcmToken")
+
         return true
     }
 

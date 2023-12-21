@@ -33,6 +33,13 @@ public class User implements IUser {
     }
 
     public User() {
+        id = "";
+        name = "";
+        avatar = "";
+        online = false;
+        fcm = "";
+        statusMessage = "";
+        uid = "";
     }
 
     public User(String id, String name, String avatar, boolean online, String fcm, String statusMessage, String uid) {
@@ -45,6 +52,10 @@ public class User implements IUser {
         this.uid = uid;
     }
 
+    public String setAvatar(String avatar) {
+        return this.avatar = avatar;
+    }
+
     @Override
     public String getId() {
         return id;
@@ -53,6 +64,10 @@ public class User implements IUser {
     @Override
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
